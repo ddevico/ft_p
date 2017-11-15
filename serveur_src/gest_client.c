@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/15 18:14:44 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/15 18:20:44 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,27 @@ static void    ls_main_simple()
     }
 }
 
+int					option_ls(int sock)
+{
+	int				r;
+	char			buf[1024];
+	int				i;
+
+	ft_bzero(buf, 1023);
+	i = 0;
+	while ((r = read(sock, buf, 1023)) > 0)
+	{
+		i++;
+		buf[r] = '\0';
+		ft_putstr(buf);
+		if (ft_strchr(buf, '\x2') != NULL)
+			break ;
+		ft_bzero(buf, 1023);
+	}
+	return (1);
+}
+
+
 static int						gest_command(char **command, int client)
 {
 	int					test;
@@ -78,7 +99,7 @@ static int						gest_command(char **command, int client)
 	}
 	else if (ft_strcmp(command[0], "ls") == 0)
 	{
-		ls_main_simple();
+		option_ls(client);
 		test = 1;
 	}
  	else if (ft_strcmp(command[0], "cd") == 0)
