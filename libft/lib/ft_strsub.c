@@ -6,47 +6,30 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 11:28:35 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 11:28:39 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/15 16:33:06 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-static char		*ft_resostr(const char *s1, const char *s2)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	int			i;
-	int			cnt;
-	char		*tmp;
+	char	*result;
+	size_t	i;
 
+	if (s == NULL)
+		return (NULL);
+	if (start > ft_strlen(s))
+		return (NULL);
+	if ((result = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
+		return (NULL);
 	i = 0;
-	cnt = 0;
-	while (s1[i] != 0)
+	while (i < len && s[start] != '\0')
 	{
-		while (s1[i] == s2[cnt])
-		{
-			i++;
-			cnt++;
-			if (s2[cnt] == 0)
-			{
-				tmp = (char *)&s1[i - cnt];
-				return (tmp);
-			}
-		}
-		cnt = 0;
+		result[i] = s[start];
+		start++;
 		i++;
 	}
-	return (NULL);
-}
-
-char			*ft_strstr(const char *s1, const char *s2)
-{
-	char	*tmp;
-
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	if (*s2 == '\0')
-		tmp = (char *)s1;
-	else
-		tmp = ft_resostr(s1, s2);
-	return (tmp);
+	result[i] = '\0';
+	return (result);
 }

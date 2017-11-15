@@ -6,7 +6,7 @@
 #    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#              #
-#    Updated: 2017/11/15 11:29:21 by ddevico          ###   ########.fr        #
+#    Updated: 2017/11/15 15:55:42 by ddevico          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,15 @@ NAME = serveur
 
 SRC_DIR	= ./serveur_src
 
-SRC = serveur.c \
+SRC = 	serveur.c \
+		gest_client.c \
 
 VPATH	= $(SRC_DIR)
 
 O_DIR	= ./obj
 OBJ		= $(addprefix $(O_DIR)/,$(SRC:.c=.o))
 
-WFLAGS = -Wall -Werror -Wextra
+WFLAGS = #-Wall -Werror -Wextra
 
 CC = gcc
 
