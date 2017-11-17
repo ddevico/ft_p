@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/15 15:53:48 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/17 10:03:19 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,28 +45,38 @@ static int				init_serveur(int port)
 	return (sock);
 }
 
-static int				active_server(int sock, int client, unsigned int id)
+static int				active_server(t_serv *serv, unsigned int id)
 {
 	pid_t				pid;
 
 	while (42)
 	{
-		if ((client = accept(sock, (struct sockaddr *)NULL, NULL)) == -1)
+		if ((serv->client = accept(serv->sock, (struct sockaddr *)NULL, NULL)) == -1)
 			ft_printf("Connection from client[%u] refused\n", ++id);
 		else
 		{
 			ft_printf("Connection from client [%u] accepted\n", ++id);
 			if ((pid = fork()) == -1)
 			{
-				close(client);
-				close(sock);
+				close(serv->client);
+				close(serv->sock);
 				return (ft_printf("fatal error: fork() failed\n"));
 			}
 			else if (pid == 0)
-				gest_client(sock, client);
-			close(client);
+				gest_client(serv);
+			close(serv->client);
 		}
 	}
+	return (0);
+}
+
+static int	init_struct(t_serv *serv, char *av)
+{
+	serv->counter = 0;
+	serv->port = ft_atoi(av);
+	if ((serv->sock = init_serveur(serv->port)) == -1)
+		return (-1);
+	getcwd(serv->pwd, 1024);
 	return (0);
 }
 
@@ -74,13 +84,14 @@ int						main(int ac, char **av)
 {
 	int					sock;
 	int					loop;
+	t_serv				serv;
 
 	if (ac != 2)
 		return (usage(av[0]));
-	if ((sock = init_serveur(ft_atoi(av[1]))) == -1)
+	if (init_struct(&serv, av[1]) == -1)
 		return (-1);
 	ft_putendl("Waiting for incoming connections...");
-	loop = active_server(sock, 0, 0);
-	close(sock);
+	loop = active_server(&serv, 0);
+	close(serv.sock);
 	return (ac);
 }

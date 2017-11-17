@@ -6,7 +6,7 @@
 #    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#              #
-#    Updated: 2017/11/15 15:55:42 by ddevico          ###   ########.fr        #
+#    Updated: 2017/11/17 08:31:08 by davydevico       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,11 @@ SRC_DIR	= ./serveur_src
 
 SRC = 	serveur.c \
 		gest_client.c \
+		get_cmd.c \
+		get_get.c \
+		get_put.c \
+		utils.c \
+		ft_get_next_line.c \
 
 VPATH	= $(SRC_DIR)
 
