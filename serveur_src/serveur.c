@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/17 10:03:19 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/17 14:57:49 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ static int				init_serveur(int port)
 static int				active_server(t_serv *serv, unsigned int id)
 {
 	pid_t				pid;
+	struct sockaddr_in	csin;
+	unsigned int		cslen;
 
 	while (42)
 	{
-		if ((serv->client = accept(serv->sock, (struct sockaddr *)NULL, NULL)) == -1)
+		if ((serv->client = accept(serv->sock, (struct sockaddr *)&csin, &cslen)) == -1)
 			ft_printf("Connection from client[%u] refused\n", ++id);
 		else
 		{
@@ -59,11 +61,10 @@ static int				active_server(t_serv *serv, unsigned int id)
 			if ((pid = fork()) == -1)
 			{
 				close(serv->client);
-				close(serv->sock);
 				return (ft_printf("fatal error: fork() failed\n"));
 			}
 			else if (pid == 0)
-				gest_client(serv);
+				gest_serveur(serv);
 			close(serv->client);
 		}
 	}
