@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 17:07:11 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/21 17:17:02 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int			server_login(int sock)
 	int		ret;
 	char	buff[1024];
 	char	*line;
-	int		fd;
 
 	ret = 0;
 	line = NULL;

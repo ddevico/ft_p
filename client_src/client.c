@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 17:01:55 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/21 17:17:35 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ static int				login_password(t_client *client, char **login)
 
 int						main(int ac, char **av)
 {
-	int					sock;
-	int					loop;
 	t_client			client;
 	char				*login;
 

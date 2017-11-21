@@ -6,13 +6,13 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 16:59:53 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/21 17:19:26 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
 
-int					lcd(char *buff, int sock)
+int					lcd(char *buff)
 {
 	char			**path;
 
@@ -26,7 +26,7 @@ int					lcd(char *buff, int sock)
 	return (1);
 }
 
-int					lpwd(int sock)
+int					lpwd(void)
 {
 	char			*pwd;
 
@@ -41,7 +41,7 @@ int					lpwd(int sock)
 	return (1);
 }
 
-int					lls(int sock)
+int					lls(void)
 {
 	DIR				*dir;
 	struct dirent	*p;

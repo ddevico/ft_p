@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 17:08:59 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/21 17:16:50 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ static int				init_struct(t_serv *serv, char *av)
 
 int						main(int ac, char **av)
 {
-	int					sock;
 	int					loop;
 	t_serv				serv;
 
@@ -97,7 +96,7 @@ int						main(int ac, char **av)
 	if (init_struct(&serv, av[1]) == -1)
 		return (-1);
 	ft_putendl("Waiting for connections...");
-	loop = active_server(serv->client, &serv, 0);
+	loop = active_server(&serv, 0, serv.client);
 	close(serv.sock);
 	return (ac);
 }

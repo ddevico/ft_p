@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 17:01:01 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/21 17:18:59 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void				read_cmd(t_client *client)
 {
-	char				*buff;
 	int					i;
 	int					read2;
 
@@ -37,11 +36,11 @@ int						gest_client(t_client *client, char *login)
 	client->buff))
 		get_put_client(client);
 	else if (!ft_strcmp("lpwd", client->buff))
-		lpwd(client->sock);
+		lpwd();
 	else if (!ft_strncmp(client->buff, "lcd", 2))
-		lcd(client->buff, client->sock);
+		lcd(client->buff);
 	else if (!ft_strcmp(client->buff, "lls"))
-		lls(client->sock);
+		lls();
 	else if (ft_strcmp("quit", client->buff) == 0)
 	{
 		ft_printcolor("SUCCESS\n", 32);

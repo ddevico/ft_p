@@ -6,7 +6,7 @@
 /*   By: ddeico <ddeico@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:15 by ddeico            #+#    #+#             */
-/*   Updated: 2017/11/21 17:10:47 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/21 17:18:26 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void					ft_printcolor(char *str, int color);
 
 int						alert_message_client(char *str, int fd);
 
-int						lpwd(int sock);
-int						lcd(char *buff, int sock);
-int						lls(int sock);
+int						lpwd();
+int						lcd(char *buff);
+int						lls();
 
 #endif
