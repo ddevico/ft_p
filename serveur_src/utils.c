@@ -6,11 +6,45 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 08:40:24 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 11:19:08 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
+
+void		ft_printcolor(char *str, int color)
+{
+	ft_putstr("\033[");
+	ft_putnbr(color);
+	ft_putstr("m");
+	ft_putstr(str);
+	ft_putstr("\033[0m");
+}
+
+int 		print_error(char *str) {
+	ft_printf("%s", str);
+	return (-1);
+}
+
+int			server_login(int sock)
+{
+	int		ret;
+	char	buff[1024];
+	char	*line;
+	int		fd;
+
+	ret = 0;
+	line = NULL;
+	buff[0] = '\0';
+	ret = recv(sock, buff, 1023, 0);
+	if (ft_strequ(buff, "admin:admin") < 1)
+	{
+		send(sock, "WRONG_PASS", 10, 0);
+		return (-1);
+	}
+	send(sock, "OK", 10, 0);
+	return (0);
+}
 
 int			alert_message(char *str, int fd)
 {

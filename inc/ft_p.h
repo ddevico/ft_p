@@ -6,7 +6,7 @@
 /*   By: ddeico <ddeico@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:15 by ddeico            #+#    #+#             */
-/*   Updated: 2017/11/21 08:38:48 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 11:39:07 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ typedef struct			s_client
 
 int				gest_serveur(t_serv *serv);
 
-void			get_error(int client);
 void			get_pwd(int client);
 void    		get_ls(int client);
 void			get_cd(char *command, t_serv *serv);
@@ -75,13 +74,17 @@ void			get_get(t_serv *serv);
 
 int				ft_get_next_line(int const fd, char **line);
 
-int				gest_client(t_client *client);
+int				gest_client(t_client *client, char *login);
 void			get_get_client(t_client *client);
 void			get_put_client(t_client *client);
 
 int				alert_message(char *str, int fd);
+int				server_login(int sock);
+int 			print_error(char *str);
+void 			ft_printcolor(char *str, int color);
+
 int				alert_message_client(char *str, int fd);
 
-
+int				lpwd(int sock);
 
 #endif

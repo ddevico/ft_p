@@ -6,21 +6,11 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/20 11:26:24 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 11:22:19 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
-
-static int 			usage(char *str) {
-	ft_printf("error: usage: %s <port>\n", str);
-	return (-1);
-}
-
-static int 			print_error(char *str) {
-	ft_printf("%s", str);
-	return (-1);
-}
 
 static int				init_client(char *addr, int port)
 {
@@ -42,18 +32,53 @@ static int				init_client(char *addr, int port)
 	return (sock);
 }
 
+static int			login_password(t_client *client, char **login)
+{
+	char			buff[1024];
+	char			*line;
+	char			*line2;
+
+	ft_putendl("Login:");
+	get_next_line(0, &line);
+	*login = ft_strdup(line);
+	ft_putendl("Password:");
+	get_next_line(0, &line2);
+	line = ft_strjoin(line, ":");
+	line = ft_strjoin(line, line2);
+	send(client->sock, line, ft_strlen(line) + 1, 0);
+	recv(client->sock, buff, 1023, 0);
+	if (!(ft_strcmp(buff, "WRONG_PASS")))
+	{
+		ft_putendl("ERROR: Wrong Password");
+		return (-1);
+	}
+	ft_printf("Welcome %s !\n", *login);
+	return (0);
+}
+
 int						main(int ac, char **av)
 {
 	int					sock;
 	int					loop;
 	t_client			client;
+	char				*login;
 
 	if (ac != 3)
-		return (usage(av[0]));
+	{
+		ft_printf("error: usage: %s <port>\n", av[0]);
+		return (-1);
+	}
 	client.sock = init_client(av[1], ft_atoi(av[2]));
-	ft_printf("ft_p> ");
+	if (login_password(&client, &login) == -1)
+	{
+		close(client.sock);
+		return (0);
+	}
+	ft_printf("[", login);
+	ft_printcolor(login, 31);
+	ft_printf("] / >", login);
 	while ((client.read = read(0, client.buff, 1023)) > 0)
-		gest_client(&client);
+		gest_client(&client, login);
 	close(client.sock);
 	return (ac);
 }

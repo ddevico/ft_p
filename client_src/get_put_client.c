@@ -6,13 +6,13 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 09:24:01 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 11:25:24 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
 
-int		print_error(int client, char *msg)
+int		print_error_fd(int client, char *msg)
 {
 	ft_putendl_fd(msg, client);
 	return (-1);
@@ -29,10 +29,10 @@ static int		open_file(char *cmd, int client)
 	if ((file = open(filename, O_RDONLY)) == -1)
 	{
 		ft_putendl("ERROR : open() file");
-		print_error(client, "FILE_ERROR");
+		print_error_fd(client, "FILE_ERROR");
 	}
 	else
-		print_error(client, "FILE_CLT_OK");
+		print_error_fd(client, "FILE_CLT_OK");
 	return (file);
 }
 
@@ -49,7 +49,10 @@ static void		run_put_client(struct stat buf, int client, void *ptr, int file)
 	munmap(ptr, buf.st_size);
 	close(file);
 	if (alert_message_client("SUCCESS", client) == 1)
-		ft_putendl("SUCCESS");
+	{
+		ft_printcolor("SUCCESS", 32);
+		ft_putchar('\n');
+	}
 }
 
 void			get_put_client(t_client *client)

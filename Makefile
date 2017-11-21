@@ -6,7 +6,7 @@
 #    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#              #
-#    Updated: 2017/11/21 08:34:28 by davydevico       ###   ########.fr        #
+#    Updated: 2017/11/21 11:40:54 by davydevico       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC_DIR_S	= ./serveur_src
 SRC_DIR_C	= ./client_src
 
 SRC_S = serveur.c \
-		gest_client.c \
+		gest_serveur.c \
 		get_cmd.c \
 		get_get.c \
 		get_put.c \
@@ -30,6 +30,7 @@ SRC_C =	client.c \
 		get_put_client.c \
 		get_get_client.c \
 		utils.c \
+		bonus_fct.c \
 
 
 O_DIR_S	= ./obj/nm

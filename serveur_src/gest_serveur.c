@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gest_client.c                                      :+:      :+:    :+:   */
+/*   gest_serveur.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/19 09:21:13 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 11:51:32 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
+
+static void 				get_error(int client)
+{
+	ft_putendl_fd("ERROR: Command not found", client);
+	ft_putendl_fd("SUCCESS", client);
+	write(client, "\0", 1);
+}
 
 static int						gest_command(t_serv *serv)
 {
@@ -24,7 +31,7 @@ static int						gest_command(t_serv *serv)
 		get_cd(serv->buff, serv);
 	else if (!ft_strcmp(serv->buff, "pwd"))
 		get_pwd(serv->client);
-	else if (!ft_strcmp(serv->buff, "quit"))
+	else if (!ft_strcmp(serv->buff, "quit") || !ft_strcmp(serv->buff, "lpwd"))
 		;
 	else
 		get_error(serv->client);

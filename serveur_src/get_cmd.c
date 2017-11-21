@@ -6,18 +6,11 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/19 09:13:08 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 11:17:43 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
-
-void 				get_error(int client)
-{
-	ft_putendl_fd("ERROR: Command not found", client);
-	ft_putendl_fd("\nSUCCESS", client);
-	write(client, "\0", 1);
-}
 
 void				get_cd(char *command, t_serv *serv)
 {
@@ -58,7 +51,7 @@ void    			get_ls(int client)
 		if (ft_strncmp(".", fic, 1) != 0)
 			ft_putendl_fd(fic, client);
 	}
-	ft_putendl_fd("\nSUCCESS", client);
+	ft_putendl_fd("SUCCESS", client);
 	write(client, "\0", 1);
 	closedir(dir);
 }
@@ -69,6 +62,6 @@ void				get_pwd(int client)
 
 	getcwd(pwd, 1024);
 	ft_putendl_fd(pwd, client);
-	ft_putendl_fd("\nSUCCESS", client);
+	ft_putendl_fd("SUCCESS", client);
 	write(client, "\0", 1);
 }

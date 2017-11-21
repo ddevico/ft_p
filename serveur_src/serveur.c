@@ -6,21 +6,11 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/17 14:57:49 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 11:05:08 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
-
-static int 			usage(char *str) {
-	ft_printf("error: usage: %s <port>\n", str);
-	return (-1);
-}
-
-static int 			print_error(char *str) {
-	ft_printf("%s", str);
-	return (-1);
-}
 
 static int				init_serveur(int port)
 {
@@ -29,20 +19,29 @@ static int				init_serveur(int port)
 	struct sockaddr_in	addr;
 
 	if (port == 0)
-		return (print_error("error: invalid port\n"));
+		return (print_error("ERROR: invalid port\n"));
 	if ((proto = getprotobyname("TCP")) == NULL)
-		return (print_error("error: getprotobyname() failed\n"));
+		return (print_error("ERROR: getprotobyname() failed\n"));
 	if ((sock = socket(PF_INET, SOCK_STREAM, proto->p_proto)) == -1)
-		return (print_error("error: socket() failed\n"));
+		return (print_error("ERROR: socket() failed\n"));
 	ft_memset((void *)&addr, 0, sizeof(addr));
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(port);
 	addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	if ((bind(sock, (const struct sockaddr *)&addr, sizeof(addr))) == -1)
-		return (print_error("error: bind() failed\n"));
+		return (print_error("ERROR: bind() failed\n"));
 	if (listen(sock, 3) == -1)
-		return (print_error("error: listen() failed\n"));
+		return (print_error("ERROR: listen() failed\n"));
 	return (sock);
+}
+
+static void 			test_pass(t_serv *serv)
+{
+	if ((server_login(serv->client)) == -1)
+	{
+		close(serv->client);
+		close(serv->sock);
+	}
 }
 
 static int				active_server(t_serv *serv, unsigned int id)
@@ -61,12 +60,15 @@ static int				active_server(t_serv *serv, unsigned int id)
 			if ((pid = fork()) == -1)
 			{
 				close(serv->client);
-				return (ft_printf("fatal error: fork() failed\n"));
+				return (ft_printf("ERROR : fork() failed\n"));
 			}
 			else if (pid == 0)
+			{
+				test_pass(serv);
 				gest_serveur(serv);
-			close(serv->client);
+			}
 		}
+		close(serv->client);
 	}
 	return (0);
 }
@@ -88,10 +90,13 @@ int						main(int ac, char **av)
 	t_serv				serv;
 
 	if (ac != 2)
-		return (usage(av[0]));
+	{
+		ft_printf("error: usage: %s <port>\n", av[0]);
+		return (-1);
+	}
 	if (init_struct(&serv, av[1]) == -1)
 		return (-1);
-	ft_putendl("Waiting for incoming connections...");
+	ft_putendl("Waiting for connections...");
 	loop = active_server(&serv, 0);
 	close(serv.sock);
 	return (ac);
