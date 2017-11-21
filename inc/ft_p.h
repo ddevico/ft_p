@@ -6,7 +6,7 @@
 /*   By: ddeico <ddeico@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:15 by ddeico            #+#    #+#             */
-/*   Updated: 2017/11/21 12:17:27 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 12:25:16 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int				alert_message_client(char *str, int fd);
 
 int				lpwd(int sock);
 int				lcd(char *buff, int sock);
+int    			lls(int sock);
 
 
 #endif

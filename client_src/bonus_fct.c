@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 12:22:14 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 12:26:51 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int			lpwd(int sock)
 	return (1);
 }
 
-int			lls(char **av, int fd)
+/*int			lls(char **av, int fd)
 {
 	pid_t	father;
 	int		status;
@@ -59,5 +59,24 @@ int			lls(char **av, int fd)
 			exit(-1);
 	}
 	free(av_ls[0]);
+	return (1);
+}*/
+
+int    			lls(int sock)
+{
+	DIR				*dir;
+	struct dirent	*p;
+	char			*fic;
+
+	if (!(dir = opendir(".")))
+		ft_putendl("ERROR");
+	while ((p = readdir(dir)))
+	{
+		fic = p->d_name;
+		if (ft_strncmp(".", fic, 1) != 0)
+			ft_putendl_fd(fic, sock);
+	}
+	ft_putendl("SUCCESS");
+	closedir(dir);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 12:19:45 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 12:27:32 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int						gest_client(t_client *client, char *login)
 		lpwd(client->sock);
 	else if (!ft_strncmp(client->buff, "lcd", 2))
 		lcd(client->buff, client->sock);
+	else if (!ft_strcmp(client->buff, "lls"))
+		lls(client->sock);
 	else if (ft_strcmp("quit", client->buff) == 0)
 	{
 		ft_printcolor("SUCCESS", 32);
