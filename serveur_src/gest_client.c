@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/17 15:50:51 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/19 09:21:13 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,14 @@ static int						gest_command(t_serv *serv)
 		get_get(serv);
 	else if (!ft_strcmp(serv->buff, "ls"))
 		get_ls(serv->client);
- 	else if (!ft_strncmp(serv->buff, "cd ", 3) || !ft_strcmp(serv->buff, "cd"))
+ 	else if (!ft_strncmp(serv->buff, "cd", 2) || !ft_strcmp(serv->buff, "cd"))
 		get_cd(serv->buff, serv);
 	else if (!ft_strcmp(serv->buff, "pwd"))
 		get_pwd(serv->client);
+	else if (!ft_strcmp(serv->buff, "quit"))
+		;
+	else
+		get_error(serv->client);
 	return (1);
 }
 
@@ -35,13 +39,8 @@ int						gest_serveur(t_serv *serv)
 		{
 			serv->buff[serv->read - 1] = '\0';
 			if (gest_command(serv))
-				;
-			else
-			{
 				if (!ft_strcmp(serv->buff, "quit"))
 					break ;
-				//ft_putendl_fd("ERROR: Command not found", serv->client);
-			}
 		}
 		ft_bzero(serv->buff, 1024);
 	}

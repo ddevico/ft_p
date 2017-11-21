@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/17 15:28:51 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/20 11:26:24 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ int						main(int ac, char **av)
 {
 	int					sock;
 	int					loop;
-	t_serv				serv;
+	t_client			client;
 
 	if (ac != 3)
 		return (usage(av[0]));
-	serv.sock = init_client(av[1], ft_atoi(av[2]));
+	client.sock = init_client(av[1], ft_atoi(av[2]));
 	ft_printf("ft_p> ");
-	while ((serv.read = read(0, serv.buff, 1023)) > 0)
-		gest_client(&serv);
-	close(serv.sock);
+	while ((client.read = read(0, client.buff, 1023)) > 0)
+		gest_client(&client);
+	close(client.sock);
 	return (ac);
 }

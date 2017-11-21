@@ -6,7 +6,7 @@
 #    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#              #
-#    Updated: 2017/11/17 15:44:44 by davydevico       ###   ########.fr        #
+#    Updated: 2017/11/21 08:34:28 by davydevico       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ SRC_S = serveur.c \
 SRC_C =	client.c \
 		gest_client.c \
 		ft_get_next_line.c \
-		get_cmd.c \
+		get_put_client.c \
+		get_get_client.c \
+		utils.c \
 
 
 O_DIR_S	= ./obj/nm
