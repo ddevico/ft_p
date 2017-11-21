@@ -6,21 +6,23 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 11:59:27 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 12:22:14 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
 
-int			lcd(char **path, int socket)
+int			lcd(char *buff, int sock)
 {
-	(void)socket;
+	char			**path;
+
+	path = ft_strsplit(buff, ' ');
 	if (path[1] && chdir(path[1]) == -1)
 	{
-		ft_putendl("ERROR");
+		ft_printcolor("ERROR", 31);
 		return (0);
 	}
-	ft_putendl("SUCCESS");
+	ft_printcolor("ERROR", 32);
 	return (1);
 }
 
@@ -28,7 +30,6 @@ int			lpwd(int sock)
 {
 	char	*pwd;
 
-	(void)socket;
 	pwd = ft_strnew(1024);
 	if (!getcwd(pwd, 1023))
 	{

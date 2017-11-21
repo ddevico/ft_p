@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 11:51:32 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 12:14:09 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static int						gest_command(t_serv *serv)
 		get_cd(serv->buff, serv);
 	else if (!ft_strcmp(serv->buff, "pwd"))
 		get_pwd(serv->client);
-	else if (!ft_strcmp(serv->buff, "quit") || !ft_strcmp(serv->buff, "lpwd"))
+	else if (!ft_strcmp(serv->buff, "quit") || !ft_strcmp(serv->buff, "lpwd")
+		|| !ft_strncmp(serv->buff, "lcd", 2) || !ft_strcmp(serv->buff, "lcd"))
 		;
 	else
 		get_error(serv->client);
