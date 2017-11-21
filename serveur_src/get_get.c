@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 15:02:43 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 17:05:38 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int		open_file(char *cmd, int client)
 	return (file);
 }
 
-static void 	run_get(t_serv *serv, struct stat buff, void *ptr)
+static void		run_get(t_serv *serv, struct stat buff, void *ptr)
 {
 	char		*size;
 

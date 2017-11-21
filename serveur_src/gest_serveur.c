@@ -6,19 +6,19 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 15:01:45 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 17:04:48 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
 
-static void 				get_error(int client)
+static void	get_error(int client)
 {
 	ft_putendl_fd("\033[31mERROR: Command not found\033[0m", client);
 	write(client, "\0", 1);
 }
 
-static int						gest_command(t_serv *serv)
+static int	gest_command(t_serv *serv)
 {
 	if (!ft_strncmp(serv->buff, "put ", 3))
 		get_put(serv);
@@ -26,7 +26,7 @@ static int						gest_command(t_serv *serv)
 		get_get(serv);
 	else if (!ft_strcmp(serv->buff, "ls"))
 		get_ls(serv->client);
- 	else if (!ft_strncmp(serv->buff, "cd", 2) || !ft_strcmp(serv->buff, "cd"))
+	else if (!ft_strncmp(serv->buff, "cd", 2) || !ft_strcmp(serv->buff, "cd"))
 		get_cd(serv->buff, serv);
 	else if (!ft_strcmp(serv->buff, "pwd"))
 		get_pwd(serv->client);
@@ -39,7 +39,7 @@ static int						gest_command(t_serv *serv)
 	return (1);
 }
 
-int						gest_serveur(t_serv *serv)
+int			gest_serveur(t_serv *serv)
 {
 	while (1)
 	{

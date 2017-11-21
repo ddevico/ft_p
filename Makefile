@@ -6,7 +6,7 @@
 #    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#              #
-#    Updated: 2017/11/21 11:40:54 by davydevico       ###   ########.fr        #
+#    Updated: 2017/11/21 17:12:23 by ddevico          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,7 +102,7 @@ norminette:
 	@echo "\n"----------------------- NORMINETTE LIBFT --------------------------"\n"
 	@norminette libft/lib/*.c libft/ft_printf/src/*.c libft/ft_printf/lib/*.c libft/inc/*.h
 	@echo "\n"----------------------- NORMINETTE NM -------------------------"\n"
-	@norminette src/nm/*.c src/otool/*.c inc/nm_otool.h
+	@norminette client_src/*.c serveur_src/*.c inc/*.h
 	@echo "\n"--------------------------- END -----------------------------------"\n"
 
 .PHONY: re fclean clean all norminette

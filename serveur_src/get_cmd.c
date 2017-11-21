@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 15:02:35 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 17:05:10 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void				get_cd(char *command, t_serv *serv)
 	write(serv->client, "\0", 1);
 }
 
-void    			get_ls(int client)
+void				get_ls(int client)
 {
 	DIR				*dir;
 	struct dirent	*p;

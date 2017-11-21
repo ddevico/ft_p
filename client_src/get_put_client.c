@@ -6,13 +6,13 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 15:06:15 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 17:02:26 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
 
-int		print_error_fd(int client, char *msg)
+int				send_error(int client, char *msg)
 {
 	ft_putendl_fd(msg, client);
 	return (-1);
@@ -28,11 +28,11 @@ static int		open_file(char *cmd, int client)
 		++filename;
 	if ((file = open(filename, O_RDONLY)) == -1)
 	{
-		ft_printcolor("ERROR : open() file", 31);
-		print_error_fd(client, "FILE_ERROR");
+		ft_printcolor("ERROR : open() file\n", 31);
+		send_error(client, "FILE_ERROR");
 	}
 	else
-		print_error_fd(client, "FILE_CLT_OK");
+		send_error(client, "FILE_CLT_OK");
 	return (file);
 }
 
@@ -49,10 +49,7 @@ static void		run_put_client(struct stat buf, int client, void *ptr, int file)
 	munmap(ptr, buf.st_size);
 	close(file);
 	if (alert_message_client("SUCCESS", client) == 1)
-	{
-		ft_printcolor("SUCCESS", 32);
-		ft_putchar('\n');
-	}
+		ft_printcolor("SUCCESS\n", 32);
 }
 
 void			get_put_client(t_client *client)
@@ -65,18 +62,18 @@ void			get_put_client(t_client *client)
 		return ;
 	if (alert_message_client("FILE_OK", client->sock) < 1)
 	{
-		ft_printcolor("ERROR : can't create the file, already exists", 31);
+		ft_printcolor("ERROR : can't create the file, already exists\n", 31);
 		return ;
 	}
 	if ((fstat(file, &buff)) == -1)
 	{
-		ft_putendl("ERROR : fstat()");
+		ft_printcolor("ERROR : fstat()\n", 31);
 		return ;
 	}
 	if ((ptr = mmap(NULL, buff.st_size, PROT_READ, MAP_PRIVATE, file, 0))
 			== MAP_FAILED)
 	{
-		ft_putendl("ERROR : mmap()");
+		ft_printcolor("ERROR : mmap()\n", 31);
 		return ;
 	}
 	run_put_client(buff, client->sock, ptr, file);

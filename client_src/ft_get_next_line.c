@@ -6,7 +6,7 @@
 /*   By: rfrey <rfrey@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/02 16:26:46 by rfrey             #+#    #+#             */
-/*   Updated: 2017/11/17 08:22:04 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 17:01:25 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char		*ft_get_join(char *s1, char *s2)
 	return (dst);
 }
 
-static int			ft_read(int fd, char **tmp)
+static int		ft_read(int fd, char **tmp)
 {
 	int			ret;
 	char		buf[BUF_SIZE + 1];
@@ -77,7 +77,7 @@ static void		ft_str(char **line, char **tmp, int *ret)
 	return ;
 }
 
-int			ft_get_next_line(const int fd, char **line)
+int				ft_get_next_line(const int fd, char **line)
 {
 	int			ret;
 	static char	*current = NULL;

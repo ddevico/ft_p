@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 11:05:08 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 17:08:59 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int				init_serveur(int port)
 	return (sock);
 }
 
-static void 			test_pass(t_serv *serv)
+static void				test_pass(t_serv *serv)
 {
 	if ((server_login(serv->client)) == -1)
 	{
@@ -44,7 +44,7 @@ static void 			test_pass(t_serv *serv)
 	}
 }
 
-static int				active_server(t_serv *serv, unsigned int id)
+static int				active_server(t_serv *serv, unsigned int id, int cli)
 {
 	pid_t				pid;
 	struct sockaddr_in	csin;
@@ -52,14 +52,14 @@ static int				active_server(t_serv *serv, unsigned int id)
 
 	while (42)
 	{
-		if ((serv->client = accept(serv->sock, (struct sockaddr *)&csin, &cslen)) == -1)
+		if ((cli = accept(serv->sock, (struct sockaddr *)&csin, &cslen)) == -1)
 			ft_printf("Connection from client[%u] refused\n", ++id);
 		else
 		{
 			ft_printf("Connection from client [%u] accepted\n", ++id);
 			if ((pid = fork()) == -1)
 			{
-				close(serv->client);
+				close(cli);
 				return (ft_printf("ERROR : fork() failed\n"));
 			}
 			else if (pid == 0)
@@ -68,12 +68,12 @@ static int				active_server(t_serv *serv, unsigned int id)
 				gest_serveur(serv);
 			}
 		}
-		close(serv->client);
+		close(cli);
 	}
 	return (0);
 }
 
-static int	init_struct(t_serv *serv, char *av)
+static int				init_struct(t_serv *serv, char *av)
 {
 	serv->counter = 0;
 	serv->port = ft_atoi(av);
@@ -97,7 +97,7 @@ int						main(int ac, char **av)
 	if (init_struct(&serv, av[1]) == -1)
 		return (-1);
 	ft_putendl("Waiting for connections...");
-	loop = active_server(&serv, 0);
+	loop = active_server(serv->client, &serv, 0);
 	close(serv.sock);
 	return (ac);
 }

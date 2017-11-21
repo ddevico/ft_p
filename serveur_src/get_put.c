@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 15:00:31 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 17:06:33 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int			open_file(char *cmd, int sock)
 	return (file);
 }
 
-static void 		run_put(int sock, int file, int totsize)
+static void			run_put(int sock, int file, int totsize)
 {
 	char			*buf;
 	int				size;
@@ -45,7 +45,7 @@ static void 		run_put(int sock, int file, int totsize)
 	write(file, buf, totsize);
 }
 
-static int		size_file(int sock)
+static int			size_file(int sock)
 {
 	int				size;
 	char			*line;
@@ -78,9 +78,9 @@ void				get_put(t_serv *serv)
 		return ;
 	if ((file = open_file(serv->buff, serv->client)) == -1)
 		return ;
-	if ((size =size_file(serv->client)) == -1)
+	if ((size = size_file(serv->client)) == -1)
 		return ;
 	run_put(serv->client, file, size);
-	ft_putendl_fd("\033[32mSUCCESS\033[0m", serv->client);
+	ft_putendl_fd("SUCCESS", serv->client);
 	close(file);
 }

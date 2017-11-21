@@ -6,21 +6,21 @@
 /*   By: ddeico <ddeico@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:15 by ddeico            #+#    #+#             */
-/*   Updated: 2017/11/21 12:25:16 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 17:10:47 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_P_H
 # define FT_P_H
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <dirent.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <sys/mman.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <sys/socket.h>
+# include <arpa/inet.h>
+# include <netdb.h>
+# include <dirent.h>
 # include "../libft/inc/libft.h"
 # include "../libft/inc/ft_printf.h"
 # define RED   "\x1B[31m"
@@ -33,21 +33,21 @@
 # define RESET "\x1B[0m"
 # define BUF_SIZE 10
 
-typedef struct	s_serv
+typedef struct			s_serv
 {
-	int			client;
-	int			port;
-	pid_t		pid;
-	char		pwd[1024];
-	int			sock;
-	char		buff[1024];
-	char		tmp[1];
-	int			read;
-	int			read2;
-	int			counter;
-	int			fd;
-	int			ret;
-}				t_serv;
+	int					client;
+	int					port;
+	pid_t				pid;
+	char				pwd[1024];
+	int					sock;
+	char				buff[1024];
+	char				tmp[1];
+	int					read;
+	int					read2;
+	int					counter;
+	int					fd;
+	int					ret;
+}						t_serv;
 
 typedef struct			s_client
 {
@@ -62,32 +62,31 @@ typedef struct			s_client
 	char				**tab;
 }						t_client;
 
-int				gest_serveur(t_serv *serv);
+int						gest_serveur(t_serv *serv);
 
-void			get_pwd(int client);
-void    		get_ls(int client);
-void			get_cd(char *command, t_serv *serv);
+void					get_pwd(int client);
+void					get_ls(int client);
+void					get_cd(char *command, t_serv *serv);
 
-void			get_put(t_serv *serv);
+void					get_put(t_serv *serv);
 
-void			get_get(t_serv *serv);
+void					get_get(t_serv *serv);
 
-int				ft_get_next_line(int const fd, char **line);
+int						ft_get_next_line(int const fd, char **line);
 
-int				gest_client(t_client *client, char *login);
-void			get_get_client(t_client *client);
-void			get_put_client(t_client *client);
+int						gest_client(t_client *client, char *login);
+void					get_get_client(t_client *client);
+void					get_put_client(t_client *client);
 
-int				alert_message(char *str, int fd);
-int				server_login(int sock);
-int 			print_error(char *str);
-void 			ft_printcolor(char *str, int color);
+int						alert_message(char *str, int fd);
+int						server_login(int sock);
+int						print_error(char *str);
+void					ft_printcolor(char *str, int color);
 
-int				alert_message_client(char *str, int fd);
+int						alert_message_client(char *str, int fd);
 
-int				lpwd(int sock);
-int				lcd(char *buff, int sock);
-int    			lls(int sock);
-
+int						lpwd(int sock);
+int						lcd(char *buff, int sock);
+int						lls(int sock);
 
 #endif

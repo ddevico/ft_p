@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 13:59:09 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 17:01:55 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ static int				init_client(char *addr, int port)
 	return (sock);
 }
 
-static int			login_password(t_client *client, char **login)
+static int				login_password(t_client *client, char **login)
 {
-	char			buff[1024];
-	char			*line;
-	char			*line2;
+	char				buff[1024];
+	char				*line;
+	char				*line2;
 
 	ft_putendl("Login:");
 	get_next_line(0, &line);
@@ -75,7 +75,7 @@ int						main(int ac, char **av)
 		return (0);
 	}
 	ft_printf("[", login);
-	ft_printcolor(login, 31);
+	ft_printcolor(login, 33);
 	ft_printf("] / >", login);
 	while ((client.read = read(0, client.buff, 1023)) > 0)
 		gest_client(&client, login);

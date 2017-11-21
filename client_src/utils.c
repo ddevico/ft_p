@@ -6,13 +6,13 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 11:32:22 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 17:02:15 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
 
-void		ft_printcolor(char *str, int color)
+void			ft_printcolor(char *str, int color)
 {
 	ft_putstr("\033[");
 	ft_putnbr(color);
@@ -21,13 +21,13 @@ void		ft_printcolor(char *str, int color)
 	ft_putstr("\033[0m");
 }
 
-int 			print_error(char *str)
+int				print_error(char *str)
 {
 	ft_printf("%s", str);
 	return (-1);
 }
 
-int			alert_message_client(char *str, int fd)
+int				alert_message_client(char *str, int fd)
 {
 	char	*input;
 	int		ret;
