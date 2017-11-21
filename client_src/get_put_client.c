@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 17:02:26 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/21 21:17:29 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,16 @@ void			get_put_client(t_client *client)
 	if ((fstat(file, &buff)) == -1)
 	{
 		ft_printcolor("ERROR : fstat()\n", 31);
+		send_error(client->sock, "TEST_ERROR");
 		return ;
 	}
 	if ((ptr = mmap(NULL, buff.st_size, PROT_READ, MAP_PRIVATE, file, 0))
 			== MAP_FAILED)
 	{
 		ft_printcolor("ERROR : mmap()\n", 31);
+		send_error(client->sock, "TEST_ERROR");
 		return ;
 	}
+	send_error(client->sock, "TEST_OK");
 	run_put_client(buff, client->sock, ptr, file);
 }

@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 14:00:58 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 21:53:20 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,11 @@ void			get_get_client(t_client *client)
 	}
 	if ((file = open_file(client->buff, client->sock)) == -1)
 		return ;
+	if (alert_message_client("TEST_OK", client->sock) < 1)
+	{
+		ft_printcolor("\033[31mERROR : mmap()\033[0m\n", 32);
+		return ;
+	}
 	if ((size = size_file(client->sock)) == -1)
 		return ;
 	run_get_client(client->sock, file, size);

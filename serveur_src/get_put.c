@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 17:06:33 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/21 22:06:37 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void				get_put(t_serv *serv)
 	if (alert_message("FILE_CLT_OK", serv->client) < 1)
 		return ;
 	if ((file = open_file(serv->buff, serv->client)) == -1)
+		return ;
+	if (alert_message("TEST_OK", serv->client) < 1)
 		return ;
 	if ((size = size_file(serv->client)) == -1)
 		return ;

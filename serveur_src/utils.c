@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 17:17:02 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/21 22:54:14 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ int			server_login(int sock)
 	line = NULL;
 	buff[0] = '\0';
 	ret = recv(sock, buff, 1023, 0);
-	if (ft_strequ(buff, "admin:admin") < 1)
+	if (!(ft_strcmp("admin:admin", buff)) || !(ft_strcmp("admin:admin\n",
+		buff)))
 	{
-		send(sock, "WRONG_PASS", 10, 0);
-		return (-1);
+		send(sock, "OK", 2, 0);
+		return (0);
 	}
-	send(sock, "OK", 10, 0);
+	send(sock, "WRONG_PASS", 10, 0);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 #    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#              #
-#    Updated: 2017/11/21 17:16:32 by ddevico          ###   ########.fr        #
+#    Updated: 2017/11/21 18:17:25 by davydevico       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ OBJ_C		= $(addprefix $(SRC_DIR_C)/,$(SRC_C:.c=.o))
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = #-Wall -Werror -Wextra
 
 HEADERS = -I inc/
 

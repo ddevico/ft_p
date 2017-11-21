@@ -6,11 +6,17 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 17:05:38 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/21 21:51:49 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
+
+int				send_error(int client, char *msg)
+{
+	ft_putendl_fd(msg, client);
+	return (-1);
+}
 
 static int		open_file(char *cmd, int client)
 {
@@ -52,15 +58,16 @@ void			get_get(t_serv *serv)
 		return ;
 	if ((fstat(file, &buff)) == -1)
 	{
-		ft_putendl_fd("\033[31mERROR : fstat()\033[0m", serv->client);
+		ft_putendl_fd("TEST_ERROR", serv->client);
 		return ;
 	}
 	if ((ptr = mmap(NULL, buff.st_size, PROT_READ, MAP_PRIVATE, file, 0))
 			== MAP_FAILED)
 	{
-		ft_putendl_fd("\033[31mERROR : mmap()\033[0m", serv->client);
+		ft_putendl_fd("TEST_ERROR", serv->client);
 		return ;
 	}
+	ft_putendl_fd("TEST_OK", serv->client);
 	run_get(serv, buff, ptr);
 	close(file);
 	if (alert_message("SUCCESS", serv->client) == 1)

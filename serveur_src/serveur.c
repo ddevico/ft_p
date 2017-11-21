@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 17:16:50 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/21 18:54:11 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void				test_pass(t_serv *serv)
 	}
 }
 
-static int				active_server(t_serv *serv, unsigned int id, int cli)
+static int				active_server(t_serv *serv, unsigned int id)
 {
 	pid_t				pid;
 	struct sockaddr_in	csin;
@@ -52,14 +52,14 @@ static int				active_server(t_serv *serv, unsigned int id, int cli)
 
 	while (42)
 	{
-		if ((cli = accept(serv->sock, (struct sockaddr *)&csin, &cslen)) == -1)
+		if ((serv->client = accept(serv->sock, (struct sockaddr *)&csin, &cslen)) == -1)
 			ft_printf("Connection from client[%u] refused\n", ++id);
 		else
 		{
 			ft_printf("Connection from client [%u] accepted\n", ++id);
 			if ((pid = fork()) == -1)
 			{
-				close(cli);
+				close(serv->client);
 				return (ft_printf("ERROR : fork() failed\n"));
 			}
 			else if (pid == 0)
@@ -68,7 +68,7 @@ static int				active_server(t_serv *serv, unsigned int id, int cli)
 				gest_serveur(serv);
 			}
 		}
-		close(cli);
+		close(serv->client);
 	}
 	return (0);
 }
@@ -96,7 +96,7 @@ int						main(int ac, char **av)
 	if (init_struct(&serv, av[1]) == -1)
 		return (-1);
 	ft_putendl("Waiting for connections...");
-	loop = active_server(&serv, 0, serv.client);
+	loop = active_server(&serv, 0);
 	close(serv.sock);
 	return (ac);
 }
