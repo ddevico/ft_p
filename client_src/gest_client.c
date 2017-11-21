@@ -6,18 +6,23 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 12:27:32 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 14:52:46 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
 
-static void 			read_cmd(t_client *client, int r)
+static void 			read_cmd(t_client *client)
 {
-	while ((r = read(client->sock, client->buff, 1)) > 0 && client->buff[0] != '\0')
+	char				*buff;
+	int					i;
+	int					read2;
+
+	i = 0;
+	while ((read2 = read(client->sock, client->buff, 1)) > 0 && client->buff[0] != '\0')
 	{
-		client->buff[r] = '\0';
-		write(1, client->buff, r);
+		client->buff[read2] = '\0';
+		write(1, client->buff, read2);
 	}
 }
 
@@ -39,12 +44,11 @@ int						gest_client(t_client *client, char *login)
 		lls(client->sock);
 	else if (ft_strcmp("quit", client->buff) == 0)
 	{
-		ft_printcolor("SUCCESS", 32);
-		ft_putchar('\n');
+		ft_printcolor("SUCCESS\n", 32);
 		exit(0);
 	}
 	else
-		read_cmd(client, r);
+		read_cmd(client);
 	ft_printf("[", login);
 	ft_printcolor(login, 31);
 	ft_printf("] / >", login);

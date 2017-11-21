@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 09:19:04 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 15:00:31 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ void				get_put(t_serv *serv)
 	if ((size =size_file(serv->client)) == -1)
 		return ;
 	run_put(serv->client, file, size);
-	ft_putendl_fd("SUCCESS", serv->client);
+	ft_putendl_fd("\033[32mSUCCESS\033[0m", serv->client);
 	close(file);
 }

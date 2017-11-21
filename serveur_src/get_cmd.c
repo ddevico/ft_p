@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 11:17:43 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 15:02:35 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,20 @@ void				get_cd(char *command, t_serv *serv)
 	path = ft_strsplit(command, ' ');
 	if (chdir(path[1]) == -1)
 	{
-		ft_putendl_fd("ERROR: Repository doesn't exist", serv->client);
+		ft_putendl_fd("\033[31mERROR: Repository doesn't exist\033[0m",
+		serv->client);
 		drap = 0;
 	}
 	getcwd(newpwd, 1024);
 	if (ft_strcmp(serv->pwd, newpwd) > 0 || ft_strnequ(path[1], "/", 1))
 	{
 		chdir(serv->pwd);
-		ft_putstr_fd("ERROR: No permission to access here\n", serv->client);
+		ft_putendl_fd("\033[31mERROR: No permission to access here\033[0m",
+		serv->client);
 		drap = 0;
 	}
 	if (drap == 1)
-		ft_putendl_fd("SUCCESS", serv->client);
+		ft_putendl_fd("\033[32mSUCCESS\033[0m", serv->client);
 	write(serv->client, "\0", 1);
 }
 
@@ -44,14 +46,14 @@ void    			get_ls(int client)
 	char			*fic;
 
 	if (!(dir = opendir(".")))
-		ft_putendl_fd("ERROR: ls failed\n", client);
+		ft_putendl_fd("\033[31mERROR: ls failed\033[0m", client);
 	while ((p = readdir(dir)))
 	{
 		fic = p->d_name;
 		if (ft_strncmp(".", fic, 1) != 0)
 			ft_putendl_fd(fic, client);
 	}
-	ft_putendl_fd("SUCCESS", client);
+	ft_putendl_fd("\033[32mSUCCESS\033[0m", client);
 	write(client, "\0", 1);
 	closedir(dir);
 }
@@ -62,6 +64,6 @@ void				get_pwd(int client)
 
 	getcwd(pwd, 1024);
 	ft_putendl_fd(pwd, client);
-	ft_putendl_fd("SUCCESS", client);
+	ft_putendl_fd("\033[32mSUCCESS\033[0m", client);
 	write(client, "\0", 1);
 }

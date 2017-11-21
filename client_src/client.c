@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 11:22:19 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 13:59:09 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int			login_password(t_client *client, char **login)
 	recv(client->sock, buff, 1023, 0);
 	if (!(ft_strcmp(buff, "WRONG_PASS")))
 	{
-		ft_putendl("ERROR: Wrong Password");
+		ft_printcolor("ERROR: Wrong Password\n", 32);
 		return (-1);
 	}
 	ft_printf("Welcome %s !\n", *login);

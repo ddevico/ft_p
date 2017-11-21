@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 09:23:51 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 15:02:43 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,17 @@ void			get_get(t_serv *serv)
 		return ;
 	if ((fstat(file, &buff)) == -1)
 	{
-		ft_putendl_fd("ERROR : fstat()", serv->client);
+		ft_putendl_fd("\033[31mERROR : fstat()\033[0m", serv->client);
 		return ;
 	}
 	if ((ptr = mmap(NULL, buff.st_size, PROT_READ, MAP_PRIVATE, file, 0))
 			== MAP_FAILED)
 	{
-		ft_putendl_fd("ERROR : mmap()", serv->client);
+		ft_putendl_fd("\033[31mERROR : mmap()\033[0m", serv->client);
 		return ;
 	}
 	run_get(serv, buff, ptr);
 	close(file);
 	if (alert_message("SUCCESS", serv->client) == 1)
-		ft_putendl_fd("SUCCESS", serv->client);
+		ft_putendl_fd("\033[32mSUCCESS\033[0m", serv->client);
 }

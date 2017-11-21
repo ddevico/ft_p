@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 11:25:24 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 15:06:15 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int		open_file(char *cmd, int client)
 		++filename;
 	if ((file = open(filename, O_RDONLY)) == -1)
 	{
-		ft_putendl("ERROR : open() file");
+		ft_printcolor("ERROR : open() file", 31);
 		print_error_fd(client, "FILE_ERROR");
 	}
 	else
@@ -65,7 +65,7 @@ void			get_put_client(t_client *client)
 		return ;
 	if (alert_message_client("FILE_OK", client->sock) < 1)
 	{
-		ft_putendl("ERROR : can't create the file, already exists");
+		ft_printcolor("ERROR : can't create the file, already exists", 31);
 		return ;
 	}
 	if ((fstat(file, &buff)) == -1)

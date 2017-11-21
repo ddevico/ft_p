@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 12:26:00 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 15:01:45 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 static void 				get_error(int client)
 {
-	ft_putendl_fd("ERROR: Command not found", client);
-	ft_putendl_fd("SUCCESS", client);
+	ft_putendl_fd("\033[31mERROR: Command not found\033[0m", client);
 	write(client, "\0", 1);
 }
 

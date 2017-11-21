@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 11:19:08 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/21 15:00:50 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		ft_printcolor(char *str, int color)
 }
 
 int 		print_error(char *str) {
-	ft_printf("%s", str);
+	ft_printcolor(str, 31);
 	return (-1);
 }
 
