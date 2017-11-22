@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/22 00:08:04 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/22 09:44:40 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ static int	gest_command(t_serv *serv)
 		get_cd(serv->buff, serv);
 	else if (!ft_strcmp(serv->buff, "pwd"))
 		get_pwd(serv->client);
-	else if (!ft_strncmp(serv->buff, "mkdir ", 4))
+	else if (!ft_strncmp(serv->buff, "mkdir ", 5))
 		get_mkdir(serv->buff, serv);
+	else if (!ft_strncmp(serv->buff, "rmdir ", 5))
+		get_rmdir(serv->buff, serv);
 	else if (!ft_strcmp(serv->buff, "quit") || !ft_strcmp(serv->buff, "lpwd")
 		|| !ft_strncmp(serv->buff, "lcd", 2) || !ft_strcmp(serv->buff, "lcd")
-		|| !ft_strcmp(serv->buff, "lls"))
+		|| !ft_strcmp(serv->buff, "lls") || !ft_strncmp(serv->buff, "lmkdir ",
+		6))
 		;
 	else
 		get_error(serv->client);

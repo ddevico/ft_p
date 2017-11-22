@@ -6,7 +6,7 @@
 /*   By: ddeico <ddeico@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:15 by ddeico            #+#    #+#             */
-/*   Updated: 2017/11/21 23:31:04 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/22 11:24:04 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@
 # define CYN   "\x1B[36m"
 # define WHT   "\x1B[37m"
 # define RESET "\x1B[0m"
-# define BUF_SIZE 10
+# define BUFF_SIZE2 256
+# define MAX_FD_NBR 10
 
 typedef struct			s_serv
 {
@@ -67,8 +68,8 @@ int						gest_serveur(t_serv *serv);
 void					get_pwd(int client);
 void					get_ls(int client);
 void					get_cd(char *command, t_serv *serv);
-void 					get_mkdir(char *command, t_serv *serv);
-
+void					get_mkdir(char *command, t_serv *serv);
+void					get_rmdir(char *command, t_serv *serv);
 
 void					get_put(t_serv *serv);
 
@@ -81,6 +82,7 @@ void					get_get_client(t_client *client);
 void					get_put_client(t_client *client);
 
 int						alert_message(char *str, int fd);
+int						alert_message_put(char *str, int fd);
 int						server_login(int sock);
 int						print_error(char *str);
 void					ft_printcolor(char *str, int color);
@@ -90,5 +92,7 @@ int						alert_message_client(char *str, int fd);
 int						lpwd();
 int						lcd(char *buff);
 int						lls();
+int						lmkdir(char *buff);
+int						lrmdir(char *buff);
 
 #endif

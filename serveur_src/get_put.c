@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 22:06:37 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/22 11:43:15 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static int			open_file(char *cmd, int sock)
 	file = open(filename, O_WRONLY | O_CREAT | O_EXCL,
 			S_IRWXU | S_IRGRP | S_IROTH);
 	if (file == -1)
-		ft_putendl_fd("FILE_ERROR", sock);
+		ft_putendl_fd("ERROR_FD", sock);
 	else
-		ft_putendl_fd("FILE_OK", sock);
+		ft_putendl_fd("VERIF_FD", sock);
 	return (file);
 }
 
@@ -57,7 +57,7 @@ static int			size_file(int sock)
 		if (size < 1)
 		{
 			ft_putendl(line);
-			ft_putendl_fd("ERROR_FILESIZE", sock);
+			ft_putendl_fd("ERROR_SIZE", sock);
 			free(line);
 			return (-1);
 		}
@@ -65,7 +65,7 @@ static int			size_file(int sock)
 	}
 	else
 		return (-1);
-	ft_putendl_fd("GO_SEND", sock);
+	ft_putendl_fd("SEND", sock);
 	return (size);
 }
 
@@ -74,7 +74,7 @@ void				get_put(t_serv *serv)
 	int				file;
 	int				size;
 
-	if (alert_message("FILE_CLT_OK", serv->client) < 1)
+	if (alert_message("CLIENT_OK", serv->client) < 1)
 		return ;
 	if ((file = open_file(serv->buff, serv->client)) == -1)
 		return ;

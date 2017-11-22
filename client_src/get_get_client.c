@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 21:53:20 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/22 10:01:29 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static int		open_file(char *cmd, int sock)
 	if (file == -1)
 	{
 		ft_printcolor("ERROR : can't create the file, already exists\n", 31);
-		ft_putendl_fd("FILE_ERROR", sock);
+		ft_putendl_fd("ERROR_FD", sock);
 	}
 	else
-		ft_putendl_fd("FILE_OK", sock);
+		ft_putendl_fd("VERIF_FD", sock);
 	return (file);
 }
 
@@ -68,17 +68,27 @@ static int		size_file(int sock)
 	}
 	else
 		return (-1);
-	ft_putendl_fd("GO_SEND", sock);
+	ft_putendl_fd("SEND", sock);
 	return (size);
+}
+
+static void		get_get_next(t_client *client)
+{
+	char		*line;
+
+	if (ft_get_next_line(client->sock, &line) == 1)
+	{
+		ft_putendl(line);
+		free(line);
+	}
 }
 
 void			get_get_client(t_client *client)
 {
 	int			file;
 	int			size;
-	char		*line;
 
-	if (alert_message_client("FILE_SRV_OK", client->sock) < 1)
+	if (alert_message_client("SERVER_OK", client->sock) < 1)
 	{
 		ft_printcolor("ERROR : open() file\n", 31);
 		return ;
@@ -94,10 +104,6 @@ void			get_get_client(t_client *client)
 		return ;
 	run_get_client(client->sock, file, size);
 	ft_putendl_fd("SUCCESS", client->sock);
-	if (ft_get_next_line(client->sock, &line) == 1)
-	{
-		ft_putendl(line);
-		free(line);
-	}
+	get_get_next(client);
 	close(file);
 }

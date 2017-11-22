@@ -6,7 +6,7 @@
 /*   By: rfrey <rfrey@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/02 16:26:46 by rfrey             #+#    #+#             */
-/*   Updated: 2017/11/21 17:01:25 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/22 11:23:56 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,80 +14,55 @@
 #include <stdlib.h>
 #include "../inc/ft_p.h"
 
-static char		*ft_get_join(char *s1, char *s2)
+static int			rootcpy(char **occ, char *root)
 {
-	char		*dst;
-
-	if (s1 == NULL)
+	if (*occ)
 	{
-		s1 = ft_strnew(1);
-		ft_bzero(s1, sizeof(s1));
-		s1 = "";
-	}
-	if (!s1 || !s2)
-		return ((char *)0);
-	dst = ft_strnew(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!dst)
-		return ((char *)0);
-	ft_strcpy(dst, s1);
-	ft_strcat(dst, s2);
-	return (dst);
-}
-
-static int		ft_read(int fd, char **tmp)
-{
-	int			ret;
-	char		buf[BUF_SIZE + 1];
-
-	if (*tmp != NULL && ft_strchr(*tmp, '\n'))
+		**occ = '\0';
+		*occ += 1;
+		ft_strcpy(root, *occ);
 		return (1);
-	ft_bzero(buf, sizeof(buf));
-	while ((ret = read(fd, buf, BUF_SIZE)) > 0)
+	}
+	else
+		return (0);
+}
+
+static char			*freeline(char **line, int *ret)
+{
+	char			*str;
+
+	str = (char *)malloc(sizeof(char) * (ft_strlen(*line) + *ret + 1));
+	if (!str)
+		return (NULL);
+	str = ft_strcpy(str, *line);
+	free(*line);
+	return (str);
+}
+
+int					ft_get_next_line(int const fd, char **line)
+{
+	char			buf[BUFF_SIZE + 1];
+	int				ret;
+	static char		root[BUFF_SIZE] = "";
+	char			*occ;
+
+	if (!line || !(*line = (char *)malloc(sizeof(char *) *
+		(BUFF_SIZE + ft_strlen(root) + 1))) || BUFF_SIZE <= 0 || fd < 0)
+		return (-1);
+	*line = ft_strcpy(*line, root);
+	while (!(occ = ft_strchr(*line, '\n'))
+		&& ((ret = read(fd, buf, BUFF_SIZE)) > 0))
 	{
-		*tmp = ft_get_join(*tmp, buf);
-		if (*tmp == NULL)
+		buf[ret] = '\0';
+		if ((*line = freeline(line, &ret)) == NULL)
 			return (-1);
-		if (ft_strchr(*tmp, '\n') != NULL)
-			break ;
-		ft_bzero(buf, sizeof(buf));
+		ft_strcat(*line, buf);
 	}
-	return (ret <= 0 ? ret : 1);
-}
-
-static void		ft_str(char **line, char **tmp, int *ret)
-{
-	char		*ptr;
-
-	if (*tmp != NULL && ft_strlen(*tmp) > 0)
-	{
-		*ret = 1;
-		ptr = ft_strchr(*tmp, '\n');
-		if (ptr == NULL)
-		{
-			*line = *tmp;
-			*tmp = NULL;
-		}
-		else
-		{
-			*line = *tmp;
-			*ptr = '\0';
-			*tmp = ft_strdup(ptr + 1);
-		}
-	}
-	return ;
-}
-
-int				ft_get_next_line(const int fd, char **line)
-{
-	int			ret;
-	static char	*current = NULL;
-
-	if (line == NULL)
-		return (-1);
-	*line = NULL;
-	ret = ft_read(fd, &current);
-	if (ret < 0)
-		return (-1);
-	ft_str(line, &current, &ret);
-	return (ret);
+	occ = ft_strchr(*line, '\n');
+	ft_bzero(root, BUFF_SIZE);
+	if (rootcpy(&occ, root) == 1)
+		return (1);
+	if (ft_strlen(*line) != 0)
+		return (1);
+	return (ret == 0 ? 0 : -1);
 }

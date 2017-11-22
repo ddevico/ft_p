@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 18:54:11 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/22 10:12:19 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,11 @@ static void				test_pass(t_serv *serv)
 static int				active_server(t_serv *serv, unsigned int id)
 {
 	pid_t				pid;
-	struct sockaddr_in	csin;
-	unsigned int		cslen;
 
 	while (42)
 	{
-		if ((serv->client = accept(serv->sock, (struct sockaddr *)&csin, &cslen)) == -1)
+		if ((serv->client = accept(serv->sock, (struct sockaddr *)NULL, NULL))
+		== -1)
 			ft_printf("Connection from client[%u] refused\n", ++id);
 		else
 		{

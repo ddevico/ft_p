@@ -6,7 +6,7 @@
 #    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/28 10:56:39 by ddevico           #+#    #+#              #
-#    Updated: 2017/10/30 09:10:56 by ddevico          ###   ########.fr        #
+#    Updated: 2017/11/22 10:31:37 by ddevico          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIB_PATH = ./lib
 OBJLIB_PATH = ./obj
 
 LIB_NAME =	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
-			ft_memchr.c ft_memcmp.c ft_strlen.c ft_strdup.c ft_strcpy.c \
+			ft_memchr.c ft_memcat.c ft_memcmp.c ft_strlen.c ft_strdup.c ft_strcpy.c \
 			ft_strncpy.c ft_strcat.c ft_strncat.c ft_strlcat.c ft_strchr.c \
 			ft_strrchr.c ft_strstr.c ft_strnstr.c ft_strcmp.c ft_strncmp.c \
 			ft_atoi.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \

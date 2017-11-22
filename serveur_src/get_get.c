@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 21:51:49 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/22 09:46:51 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static int		open_file(char *cmd, int client)
 	while (*filename == ' ')
 		++filename;
 	if ((file = open(filename, O_RDONLY)) == -1)
-		ft_putendl_fd("FILE_ERROR", client);
+		ft_putendl_fd("ERROR_FD", client);
 	else
-		ft_putendl_fd("FILE_SRV_OK", client);
+		ft_putendl_fd("SERVER_OK", client);
 	return (file);
 }
 
@@ -40,7 +40,7 @@ static void		run_get(t_serv *serv, struct stat buff, void *ptr)
 	size = ft_itoa(buff.st_size);
 	ft_putendl_fd(size, serv->client);
 	free(size);
-	if (alert_message("GO_SEND", serv->client) < 1)
+	if (alert_message("SEND", serv->client) < 1)
 		return ;
 	send(serv->client, ptr, buff.st_size, 0);
 	munmap(ptr, buff.st_size);
@@ -54,7 +54,7 @@ void			get_get(t_serv *serv)
 
 	if ((file = open_file(serv->buff, serv->client)) == -1)
 		return ;
-	if (alert_message("FILE_OK", serv->client) < 1)
+	if (alert_message("VERIF_FD", serv->client) < 1)
 		return ;
 	if ((fstat(file, &buff)) == -1)
 	{
