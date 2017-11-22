@@ -6,11 +6,18 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/22 10:12:19 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/22 16:58:56 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
+
+void	handle_sigtstp(int sig)
+{
+	(void)sig;
+	write(1, "\n", 1);
+	kill(0, SIGSTOP);
+}
 
 static int				init_serveur(int port)
 {
@@ -65,9 +72,12 @@ static int				active_server(t_serv *serv, unsigned int id)
 			{
 				test_pass(serv);
 				gest_serveur(serv);
+				wait(NULL);
 			}
 		}
 		close(serv->client);
+		signal(SIGTSTP, handle_sigtstp);
+		kill(pid, SIGKILL);
 	}
 	return (0);
 }

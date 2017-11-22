@@ -6,7 +6,7 @@
 /*   By: ddeico <ddeico@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:15 by ddeico            #+#    #+#             */
-/*   Updated: 2017/11/22 11:24:04 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/22 16:55:12 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <arpa/inet.h>
 # include <netdb.h>
 # include <dirent.h>
+# include <sys/types.h>
+# include <signal.h>
 # include "../libft/inc/libft.h"
 # include "../libft/inc/ft_printf.h"
 # define RED   "\x1B[31m"
