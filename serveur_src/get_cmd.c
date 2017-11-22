@@ -6,11 +6,24 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 17:05:10 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/22 00:06:50 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
+
+void 				get_mkdir(char *command, t_serv *serv)
+{
+	char			**path;
+
+	path = ft_strsplit(command, ' ');
+	if (!path[1])
+		return ;
+	if (mkdir(path[1], S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH) == 0)
+		ft_putendl_fd("\033[31mSUCCESS\033[0m", serv->client);
+	else
+		ft_putendl_fd("\033[31mERROR: mkdir\033[0m", serv->client);
+}
 
 void				get_cd(char *command, t_serv *serv)
 {

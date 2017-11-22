@@ -6,7 +6,7 @@
 /*   By: ddeico <ddeico@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:15 by ddeico            #+#    #+#             */
-/*   Updated: 2017/11/21 17:18:26 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/21 23:31:04 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int						gest_serveur(t_serv *serv);
 void					get_pwd(int client);
 void					get_ls(int client);
 void					get_cd(char *command, t_serv *serv);
+void 					get_mkdir(char *command, t_serv *serv);
+
 
 void					get_put(t_serv *serv);
 
