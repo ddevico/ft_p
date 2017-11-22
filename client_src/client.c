@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/21 23:25:06 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/22 08:59:28 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static int				init_client(char *addr, int port)
 		return (print_error("error: socket() failed\n"));
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(port);
+	if (ft_strequ(addr, "localhost") == 1)
+		addr = "127.0.0.1";
 	sin.sin_addr.s_addr = inet_addr(addr);
 	if ((connect(sock, (const struct sockaddr *)&sin, sizeof(sin))) == -1)
 		return (print_error("error: Connect() failed\n"));
@@ -66,7 +68,8 @@ int						main(int ac, char **av)
 		ft_printf("error: usage: %s <port>\n", av[0]);
 		return (-1);
 	}
-	client.sock = init_client(av[1], ft_atoi(av[2]));
+	if ((client.sock = init_client(av[1], ft_atoi(av[2]))) == -1)
+		return (0);
 	if (login_password(&client, &login) == -1)
 	{
 		close(client.sock);
