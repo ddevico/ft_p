@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/22 13:51:40 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/22 15:16:36 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void	get_error(int client)
 
 static int	gest_command(t_serv *serv)
 {
-	if (ft_strnequ(serv->buff, "put ", 4))
+	if (!ft_strncmp("put ", serv->buff, 4) || !ft_strcmp("put",
+	serv->buff))
 		get_put(serv);
 	else if (!ft_strncmp(serv->buff, "get ", 3))
 		get_get(serv);

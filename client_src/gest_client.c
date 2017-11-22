@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/22 13:51:21 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/22 15:18:06 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int						gest_client(t_client *client, char *login)
 	write(client->sock, client->buff, client->read);
 	if (!ft_strncmp("get ", client->buff, 4) || !ft_strcmp("get", client->buff))
 		get_get_client(client);
-	else if (ft_strnequ(client->buff, "put ", 4))
+	else if (!ft_strncmp("put ", client->buff, 4) || !ft_strcmp("put",
+	client->buff))
 		get_put_client(client);
 	else if (gest_client2(client) == 1)
 		;
