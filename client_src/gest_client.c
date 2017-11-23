@@ -6,13 +6,13 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/22 15:18:06 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/23 12:17:07 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
 
-static void				read_cmd(t_client *client)
+static void				read_client_cmd(t_client *client)
 {
 	int					i;
 	int					read2;
@@ -28,15 +28,15 @@ static void				read_cmd(t_client *client)
 
 static int				gest_client2(t_client *client)
 {
-	if (!ft_strncmp(client->buff, "lcd", 2))
+	if (ft_strnequ(client->buff, "lcd", 3))
 		lcd(client->buff);
-	else if (!ft_strcmp(client->buff, "lls"))
+	else if (ft_strequ(client->buff, "lls"))
 		lls();
-	else if (!ft_strcmp("lpwd", client->buff))
+	else if (ft_strequ(client->buff, "lpwd"))
 		lpwd();
-	else if (!ft_strncmp(client->buff, "lmkdir ", 6))
+	else if (ft_strnequ(client->buff, "lmkdir", 6))
 		lmkdir(client->buff);
-	else if (!ft_strncmp(client->buff, "lrmdir ", 6))
+	else if (ft_strnequ(client->buff, "lrmdir", 6))
 		lrmdir(client->buff);
 	else
 		return (0);
@@ -45,22 +45,20 @@ static int				gest_client2(t_client *client)
 
 int						gest_client(t_client *client, char *login)
 {
-	client->buff[client->read - 1] = '\0';
-	write(client->sock, client->buff, client->read);
-	if (!ft_strncmp("get ", client->buff, 4) || !ft_strcmp("get", client->buff))
+	ft_putendl_fd(client->buff, client->sock);
+	if (ft_strnequ(client->buff, "get ", 4))
 		get_get_client(client);
-	else if (!ft_strncmp("put ", client->buff, 4) || !ft_strcmp("put",
-	client->buff))
+	else if (ft_strnequ(client->buff, "put ", 4))
 		get_put_client(client);
 	else if (gest_client2(client) == 1)
 		;
-	else if (ft_strcmp("quit", client->buff) == 0)
+	else if (ft_strequ(client->buff, "quit"))
 	{
 		ft_printcolor("SUCCESS\n", 32);
 		exit(0);
 	}
 	else
-		read_cmd(client);
+		read_client_cmd(client);
 	ft_printf("[", login);
 	ft_printcolor(login, 33);
 	ft_printf("] / >", login);

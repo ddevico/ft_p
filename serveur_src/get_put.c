@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/22 11:43:15 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/23 11:19:09 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void				get_put(t_serv *serv)
 {
 	int				file;
 	int				size;
+	int				ret;
 
 	if (alert_message("CLIENT_OK", serv->client) < 1)
 		return ;

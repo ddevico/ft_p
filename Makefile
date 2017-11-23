@@ -6,7 +6,7 @@
 #    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#              #
-#    Updated: 2017/11/22 09:49:07 by ddevico          ###   ########.fr        #
+#    Updated: 2017/11/23 11:32:41 by davydevico       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC_S = serveur.c \
 		get_put.c \
 		utils.c \
 		ft_get_next_line.c \
+		bonus_serv.c
 
 SRC_C =	client.c \
 		gest_client.c \
@@ -30,7 +31,7 @@ SRC_C =	client.c \
 		get_put_client.c \
 		get_get_client.c \
 		utils.c \
-		bonus_fct.c \
+		bonus_clt.c \
 
 
 O_DIR_S	= ./obj/nm
@@ -40,7 +41,7 @@ OBJ_C		= $(addprefix $(SRC_DIR_C)/,$(SRC_C:.c=.o))
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = #-Wall -Werror -Wextra
 
 HEADERS = -I inc/
 

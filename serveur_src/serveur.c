@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/22 16:58:56 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/23 09:18:50 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ static int				active_server(t_serv *serv, unsigned int id)
 			{
 				test_pass(serv);
 				gest_serveur(serv);
-				wait(NULL);
+				//wait(NULL);
 			}
 		}
 		close(serv->client);
-		signal(SIGTSTP, handle_sigtstp);
-		kill(pid, SIGKILL);
+		//signal(SIGTSTP, handle_sigtstp);
+		//kill(pid, SIGKILL);
 	}
 	return (0);
 }

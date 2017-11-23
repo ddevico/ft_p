@@ -6,7 +6,7 @@
 /*   By: ddeico <ddeico@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:15 by ddeico            #+#    #+#             */
-/*   Updated: 2017/11/22 16:55:12 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/23 11:34:00 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct			s_serv
 	pid_t				pid;
 	char				pwd[1024];
 	int					sock;
-	char				buff[1024];
+	char				*buff;
 	char				tmp[1];
 	int					read;
 	int					read2;
@@ -55,7 +55,7 @@ typedef struct			s_serv
 typedef struct			s_client
 {
 	int					sock;
-	char				buff[1024];
+	char				*buff;
 	char				tmp[1];
 	int					i;
 	int					read;
@@ -70,8 +70,11 @@ int						gest_serveur(t_serv *serv);
 void					get_pwd(int client);
 void					get_ls(int client);
 void					get_cd(char *command, t_serv *serv);
+
 void					get_mkdir(char *command, t_serv *serv);
 void					get_rmdir(char *command, t_serv *serv);
+void					get_rm(char *command, t_serv *serv);
+
 
 void					get_put(t_serv *serv);
 
