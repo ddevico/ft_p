@@ -6,7 +6,7 @@
 /*   By: ddeico <ddeico@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:15 by ddeico            #+#    #+#             */
-/*   Updated: 2017/11/23 11:34:00 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/23 14:13:41 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void					get_get_client(t_client *client);
 void					get_put_client(t_client *client);
 
 int						alert_message(char *str, int fd);
-int						alert_message_put(char *str, int fd);
 int						server_login(int sock);
 int						print_error(char *str);
 void					ft_printcolor(char *str, int color);

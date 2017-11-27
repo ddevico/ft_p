@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/23 11:19:09 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/23 14:09:21 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,20 @@ static int			open_file(char *cmd, int sock)
 
 static void			run_put(int sock, int file, int totsize)
 {
-	char			*buf;
+	char			*buff;
 	int				size;
 	int				n;
 
 	n = 0;
-	buf = malloc(sizeof(char) * totsize);
+	buff = malloc(sizeof(char) * totsize);
+	if (!buff)
+		exit(1);
 	while (n < totsize)
 	{
-		size = recv(sock, buf + n, 4096, 0);
+		size = recv(sock, buff + n, 4096, 0);
 		n += size;
 	}
-	write(file, buf, totsize);
+	write(file, buff, totsize);
 }
 
 static int			size_file(int sock)
