@@ -6,11 +6,23 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/23 11:09:37 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/28 11:22:12 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
+
+void	signalstop(int c)
+{
+	(void)c;
+	signal(SIGTSTP, signalstop);
+	ft_printf("SIGTSTP Catch\n");
+}
+
+void	linux_pipe(void)
+{
+	signal(SIGPIPE, SIG_IGN);
+}
 
 static int				init_client(char *addr, int port)
 {
@@ -52,6 +64,7 @@ static int				login_password(t_client *client, char **login)
 	if (!(ft_strcmp(buff, "WRONG_PASS")))
 	{
 		ft_printcolor("ERROR: Wrong Password\n", 31);
+		close(client->sock);
 		return (-1);
 	}
 	ft_printf("Welcome %s !\n", *login);
@@ -64,18 +77,20 @@ int						main(int ac, char **av)
 	int					ret;
 	char				*login;
 
+	signal(SIGTSTP, signalstop);
 	if (ac != 3)
 	{
 		ft_printf("error: usage: %s <port>\n", av[0]);
+		close(client.sock);
 		return (-1);
 	}
 	if ((client.sock = init_client(av[1], ft_atoi(av[2]))) == -1)
-		return (0);
-	if (login_password(&client, &login) == -1)
 	{
 		close(client.sock);
 		return (0);
 	}
+	if (login_password(&client, &login) == -1)
+		return (0);
 	ft_printf("[", login);
 	ft_printcolor(login, 33);
 	ft_printf("] / >", login);

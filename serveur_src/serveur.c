@@ -6,17 +6,22 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/23 09:18:50 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/28 11:17:26 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
 
-void	handle_sigtstp(int sig)
+void	signalstop(int c)
 {
-	(void)sig;
-	write(1, "\n", 1);
-	kill(0, SIGSTOP);
+	(void)c;
+	signal(SIGTSTP, signalstop);
+	ft_printf("SIGTSTP Catch\n");
+}
+
+void	linux_pipe(void)
+{
+	signal(SIGPIPE, SIG_IGN);
 }
 
 static int				init_serveur(int port)
@@ -66,19 +71,17 @@ static int				active_server(t_serv *serv, unsigned int id)
 			if ((pid = fork()) == -1)
 			{
 				close(serv->client);
+				signal(SIGCHLD, SIG_IGN);
 				return (ft_printf("ERROR : fork() failed\n"));
 			}
 			else if (pid == 0)
 			{
 				test_pass(serv);
 				gest_serveur(serv);
-				//wait(NULL);
 			}
 		}
-		close(serv->client);
-		//signal(SIGTSTP, handle_sigtstp);
-		//kill(pid, SIGKILL);
 	}
+	close(serv->client);
 	return (0);
 }
 
@@ -97,6 +100,9 @@ int						main(int ac, char **av)
 	int					loop;
 	t_serv				serv;
 
+	signal(SIGTSTP, signalstop);
+	if (!SO_NOSIGPIPE)
+		linux_pipe();
 	if (ac != 2)
 	{
 		ft_printf("error: usage: %s <port>\n", av[0]);

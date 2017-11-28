@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/23 11:35:49 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/28 10:53:11 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void				get_mkdir(char *command, t_serv *serv)
 		ft_putendl_fd("\033[31mERROR: mkdir\033[0m", serv->client);
 	write(serv->client, "\0", 1);
 }
-
 
 void				get_rm(char *command, t_serv *serv)
 {
