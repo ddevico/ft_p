@@ -6,23 +6,11 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/28 11:17:26 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/28 17:00:08 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
-
-void	signalstop(int c)
-{
-	(void)c;
-	signal(SIGTSTP, signalstop);
-	ft_printf("SIGTSTP Catch\n");
-}
-
-void	linux_pipe(void)
-{
-	signal(SIGPIPE, SIG_IGN);
-}
 
 static int				init_serveur(int port)
 {
@@ -42,7 +30,7 @@ static int				init_serveur(int port)
 	addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	if ((bind(sock, (const struct sockaddr *)&addr, sizeof(addr))) == -1)
 		return (print_error("ERROR: bind() failed\n"));
-	if (listen(sock, 3) == -1)
+	if (listen(sock, 42) == -1)
 		return (print_error("ERROR: listen() failed\n"));
 	return (sock);
 }
@@ -53,12 +41,14 @@ static void				test_pass(t_serv *serv)
 	{
 		close(serv->client);
 		close(serv->sock);
+		exit(1);
 	}
 }
 
 static int				active_server(t_serv *serv, unsigned int id)
 {
 	pid_t				pid;
+	int 				status;
 
 	while (42)
 	{
@@ -69,17 +59,17 @@ static int				active_server(t_serv *serv, unsigned int id)
 		{
 			ft_printf("Connection from client [%u] accepted\n", ++id);
 			if ((pid = fork()) == -1)
-			{
-				close(serv->client);
-				signal(SIGCHLD, SIG_IGN);
-				return (ft_printf("ERROR : fork() failed\n"));
-			}
+				return (print_error("ERROR : fork() failed\n"));
 			else if (pid == 0)
 			{
 				test_pass(serv);
 				gest_serveur(serv);
+				break ;
 			}
+			else
+				wait(NULL);
 		}
+		close(serv->client);
 	}
 	close(serv->client);
 	return (0);
@@ -101,8 +91,6 @@ int						main(int ac, char **av)
 	t_serv				serv;
 
 	signal(SIGTSTP, signalstop);
-	if (!SO_NOSIGPIPE)
-		linux_pipe();
 	if (ac != 2)
 	{
 		ft_printf("error: usage: %s <port>\n", av[0]);
@@ -111,7 +99,8 @@ int						main(int ac, char **av)
 	if (init_struct(&serv, av[1]) == -1)
 		return (-1);
 	ft_putendl("Waiting for connections...");
-	loop = active_server(&serv, 0);
+	if ((loop = active_server(&serv, 0)) == -1)
+		close(serv.client);
 	close(serv.sock);
 	return (ac);
 }

@@ -6,22 +6,17 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/28 11:26:27 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/28 16:24:56 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
 
-void	signalstop(int c)
+void					signalstop(int c)
 {
 	(void)c;
 	signal(SIGTSTP, signalstop);
 	ft_printf("SIGTSTP Catch\n");
-}
-
-void	linux_pipe(void)
-{
-	signal(SIGPIPE, SIG_IGN);
 }
 
 static int				init_client(char *addr, int port)

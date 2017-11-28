@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/23 12:23:13 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/28 15:40:19 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int			gest_serveur(t_serv *serv)
 					break ;
 			free(serv->buff);
 		}
+		else
+			break ;
 	}
 	ft_printf("Disconnected from client\n");
 	close(serv->client);

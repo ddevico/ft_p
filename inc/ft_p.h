@@ -6,7 +6,7 @@
 /*   By: ddeico <ddeico@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:15 by ddeico            #+#    #+#             */
-/*   Updated: 2017/11/23 14:13:41 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/28 16:46:12 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <dirent.h>
 # include <sys/types.h>
 # include <signal.h>
+# include <sys/wait.h>
 # include "../libft/inc/libft.h"
 # include "../libft/inc/ft_printf.h"
 # define RED   "\x1B[31m"
@@ -75,7 +76,6 @@ void					get_mkdir(char *command, t_serv *serv);
 void					get_rmdir(char *command, t_serv *serv);
 void					get_rm(char *command, t_serv *serv);
 
-
 void					get_put(t_serv *serv);
 
 void					get_get(t_serv *serv);
@@ -90,6 +90,7 @@ int						alert_message(char *str, int fd);
 int						server_login(int sock);
 int						print_error(char *str);
 void					ft_printcolor(char *str, int color);
+void					signalstop(int c);
 
 int						alert_message_client(char *str, int fd);
 
