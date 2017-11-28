@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/23 10:08:58 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/23 14:13:35 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,6 @@ int			server_login(int sock)
 	}
 	send(sock, "WRONG_PASS", 10, 0);
 	return (0);
-}
-
-int			alert_message_put(char *str, int fd)
-{
-	char	*input;
-	int		ret;
-
-	input = NULL;
-	ret = 0;
-	if (ft_get_next_line(fd, &input) == -1)
-		return (-1);
-	if (ft_strstr(input, "K") != NULL)
-		ret = 1;
-	else
-		ret = ft_strequ(input, str);
-	free(input);
-	return (ret);
 }
 
 int			alert_message(char *str, int fd)
