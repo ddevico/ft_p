@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/28 16:24:56 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/29 09:35:18 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void					signalstop(int c)
 {
 	(void)c;
 	signal(SIGTSTP, signalstop);
-	ft_printf("SIGTSTP Catch\n");
 }
 
 static int				init_client(char *addr, int port)

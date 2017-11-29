@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/28 16:26:52 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/29 09:35:08 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void		signalstop(int c)
 {
 	(void)c;
 	signal(SIGTSTP, signalstop);
-	ft_printf("SIGTSTP Catch\n");
 }
 
 void		ft_printcolor(char *str, int color)

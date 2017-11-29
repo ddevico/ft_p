@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/28 15:40:19 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/29 10:35:38 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,21 @@ static int	gest_command(t_serv *serv)
 		get_get(serv);
 	else if (ft_strequ(serv->buff, "ls"))
 		get_ls(serv->client);
-	else if (ft_strnequ(serv->buff, "cd", 2))
+	else if (ft_strnequ(serv->buff, "cd ", 3))
 		get_cd(serv->buff, serv);
 	else if (ft_strequ(serv->buff, "pwd"))
 		get_pwd(serv->client);
-	else if (ft_strnequ(serv->buff, "mkdir", 5))
+	else if (ft_strnequ(serv->buff, "mkdir ", 6))
 		get_mkdir(serv->buff, serv);
-	else if (ft_strnequ(serv->buff, "rmdir", 5))
+	else if (ft_strnequ(serv->buff, "rmdir ", 6))
 		get_rmdir(serv->buff, serv);
-	else if (ft_strnequ(serv->buff, "rm", 2))
+	else if (ft_strnequ(serv->buff, "rm ", 3))
 		get_rm(serv->buff, serv);
 	else if (ft_strequ(serv->buff, "quit") || ft_strequ(serv->buff, "lpwd")
-		|| ft_strnequ(serv->buff, "lcd", 3) || ft_strequ(serv->buff, "lls")
-		|| ft_strnequ(serv->buff, "lmkdir", 6)
-		|| ft_strnequ(serv->buff, "lrmdir", 6))
+		|| ft_strnequ(serv->buff, "lcd ", 4) || ft_strequ(serv->buff, "lls")
+		|| ft_strnequ(serv->buff, "lmkdir ", 7)
+		|| ft_strnequ(serv->buff, "lrmdir ", 7)
+		|| ft_strnequ(serv->buff, "lrm ", 4))
 		;
 	else
 		get_error(serv->client);

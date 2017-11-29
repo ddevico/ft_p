@@ -6,7 +6,7 @@
 /*   By: ddeico <ddeico@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:15 by ddeico            #+#    #+#             */
-/*   Updated: 2017/11/28 16:46:12 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/29 10:36:08 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,7 @@ int						lcd(char *buff);
 int						lls();
 int						lmkdir(char *buff);
 int						lrmdir(char *buff);
+
+int						lrm(char *buff);
 
 #endif

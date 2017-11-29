@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/28 10:10:25 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/29 10:31:54 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,18 @@ static void				read_client_cmd(t_client *client)
 
 static int				gest_client2(t_client *client)
 {
-	if (ft_strnequ(client->buff, "lcd", 3))
+	if (ft_strnequ(client->buff, "lcd ", 4))
 		lcd(client->buff);
 	else if (ft_strequ(client->buff, "lls"))
 		lls();
 	else if (ft_strequ(client->buff, "lpwd"))
 		lpwd();
-	else if (ft_strnequ(client->buff, "lmkdir", 6))
+	else if (ft_strnequ(client->buff, "lmkdir ", 7))
 		lmkdir(client->buff);
-	else if (ft_strnequ(client->buff, "lrmdir", 6))
+	else if (ft_strnequ(client->buff, "lrmdir ", 7))
 		lrmdir(client->buff);
+	else if (ft_strnequ(client->buff, "lrm ", 4))
+		lrm(client->buff);
 	else
 		return (0);
 	return (1);

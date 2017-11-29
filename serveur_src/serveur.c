@@ -6,20 +6,11 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/28 18:09:04 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/29 10:01:16 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_p.h"
-
-int		ft_wait(int pid, int options)
-{
-	int				status;
-	struct rusage	usage;
-
-	wait4(pid, &status, options, &usage);
-	return (status);
-}
 
 static int				init_serveur(int port)
 {
@@ -57,7 +48,6 @@ static void				test_pass(t_serv *serv)
 static int				active_server(t_serv *serv, unsigned int id)
 {
 	pid_t				pid;
-	int 				status;
 
 	while (42)
 	{
@@ -75,10 +65,7 @@ static int				active_server(t_serv *serv, unsigned int id)
 				gest_serveur(serv);
 				break ;
 			}
-			else
-				ft_wait(pid, 0);
 		}
-		close(serv->client);
 	}
 	close(serv->client);
 	return (0);

@@ -6,7 +6,7 @@
 #    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#              #
-#    Updated: 2017/11/23 11:32:41 by davydevico       ###   ########.fr        #
+#    Updated: 2017/11/29 10:37:55 by ddevico          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC_C =	client.c \
 		get_get_client.c \
 		utils.c \
 		bonus_clt.c \
+		bonus_clt2.c \
 
 
 O_DIR_S	= ./obj/nm
@@ -41,7 +42,7 @@ OBJ_C		= $(addprefix $(SRC_DIR_C)/,$(SRC_C:.c=.o))
 
 CC = gcc
 
-CFLAGS = #-Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 
 HEADERS = -I inc/
 
@@ -74,7 +75,7 @@ serveur: $(OBJ_S)
 client: $(OBJ_C)
 		@echo "\n\033[31m==> COMPILING in progress ...\033[0m\n"
 		@make -C libft
-		@$(CC) $(WFLAGS) $(O_NM_NO_MAIN) $(HEADERS) -o $@ $(OBJ_C) $(LIBFT) $(I_PRINTF)
+		@$(CC) $(WFLAGS) $(HEADERS) -o $@ $(OBJ_C) $(LIBFT) $(I_PRINTF)
 		@echo "\n\033[32m==> SUCCESS !\033[0m\n"
 
 obj/%.o: %.c
@@ -102,7 +103,7 @@ re: fclean all
 norminette:
 	@echo "\n"----------------------- NORMINETTE LIBFT --------------------------"\n"
 	@norminette libft/lib/*.c libft/ft_printf/src/*.c libft/ft_printf/lib/*.c libft/inc/*.h
-	@echo "\n"----------------------- NORMINETTE NM -------------------------"\n"
+	@echo "\n"------------------------ NORMINETTE FT_P --------------------------"\n"
 	@norminette client_src/*.c serveur_src/*.c inc/*.h
 	@echo "\n"--------------------------- END -----------------------------------"\n"
 
