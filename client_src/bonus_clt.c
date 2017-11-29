@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/29 10:16:07 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/29 16:16:52 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int					lcd(char *buff)
 	char			**path;
 
 	path = ft_strsplit(buff, ' ');
-	if (path[1] && chdir(path[1]) == -1)
+	if (chdir(path[1]) == -1)
 	{
-		ft_printcolor("ERROR: lcd\n", 31);
+		ft_printcolor("ERROR: Repository doesn't exist\n", 31);
 		return (0);
 	}
 	ft_printcolor("SUCCESS\n", 32);
